@@ -15,6 +15,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var myFriends = ["Ryan", "Nicole", "Sara", "Tyler"]
 
 
+    var restaurantImageData = [String()]
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return myFriends.count
         //return 4
@@ -29,12 +31,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
 
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+    }
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    
+        let path = Bundle.main.path(forResource: "Propert List" , ofType: "plist")
+        let dict = NSDictionary(contentsOfFile: path!)
+        
+        restaurantImageData = dict!.object(forKey: "restauntrantImage") as! [String]
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,4 +55,3 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
 
 }
-
